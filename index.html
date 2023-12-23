@@ -8,7 +8,8 @@
 <body>
     <script>
         function getComputerChoice(){
-            let numberChoice = Math.floor(Math.random() * 3) + 1
+            let numberChoice = Math.floor(Math.random() * 3) + 1 
+            // generate a number between 0 and 1, multiply by three, take the floor, and add 1. Range: (1:3)
             switch(numberChoice){
                 case 1:
                     return "Rock";
@@ -21,7 +22,7 @@
 
         function playRound(playerSelection, computerSelection){
             if(playerSelection.toUpperCase() == computerSelection.toUpperCase()){
-                return `Draw! You Both Selected ${computerSelection}`;
+                return `You Draw! You Both Selected ${computerSelection}`;
             }
             else if(playerSelection.toUpperCase() == "ROCK" && computerSelection.toUpperCase() == "SCISSORS"){
                 return "You Win! Rock beats Scissors";
@@ -33,19 +34,26 @@
                 return "You Win! Paper beats Rock";
             }
             else if(playerSelection.toUpperCase() == "PAPER" && computerSelection.toUpperCase() == "SCISSORS"){
-                return "You Lose! Scissors beats Paper"
+                return "You Lose! Scissors beats Paper";
             }
             else if(playerSelection.toUpperCase() == "SCISSORS" && computerSelection.toUpperCase() == "ROCK"){
-                return "You Lose! Rock beats Scissors"
+                return "You Lose! Rock beats Scissors";
             }
             else if(playerSelection.toUpperCase() == "SCISSORS" && computerSelection.toUpperCase() == "PAPER"){
-                return "You Win! Scissors beats Paper"
+                return "You Win! Scissors beats Paper";
+            }
+            else{
+                return "Something Went Wrong...";
             }
         }
 
-        const playerSelection = "rock"
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        function didPlayerWin(roundResult){
+
+            if(roundResult.charAt(4) == 'W'){
+                return true;
+            }
+            return false;
+        }
 
     </script>
 </body>
