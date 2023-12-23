@@ -55,6 +55,22 @@
             return false;
         }
 
+        function game(){
+            let roundResult;
+            let playerWinCount = 0;
+            let computerSelection;
+            let playerSelection;
+            for(let i = 0; i < 5; i++){
+                playerSelection = prompt("Pick Rock, Paper, or Scissors: ");
+                computerSelection = getComputerChoice();
+                roundResult = playRound(playerSelection, computerSelection);
+                playerWinCount = didPlayerWin(roundResult) ? playerWinCount + 1 : playerWinCount;
+                console.log(roundResult);
+            }
+            console.log(playerWinCount);
+        }
+
+        game();
     </script>
 </body>
 </html>
