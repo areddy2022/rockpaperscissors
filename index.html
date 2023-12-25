@@ -66,7 +66,9 @@
                 playerSelection = prompt("Pick Rock, Paper, or Scissors: ");
                 computerSelection = getComputerChoice();
                 roundResult = playRound(playerSelection, computerSelection);
-                playerWinCount = didPlayerWin(roundResult) ? playerWinCount + 1 : playerWinCount;
+                playerWinCount = didPlayerWin(roundResult) 
+                    ? playerWinCount + 1 
+                    : playerWinCount;
                 console.log(roundResult);
             }
             console.log(playerWinCount);
