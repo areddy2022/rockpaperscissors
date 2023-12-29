@@ -5,10 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
+    <div class="choices">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div class="result"></div>
     <script>
+        let playerSelection;
+        let roundResult;
+        let playerWinCount = 0;
+        let computerSelection;
+        let roundNumber = 0;
+
+        let menu = document.querySelector(".choices");
+        menu.addEventListener("click", (event) => {
+            target = event.target;
+
+            switch (target.id) {
+                case "rock":
+                    playerSelection = "rock";
+                    game();
+                    break;
+                case "paper":
+                    playerSelection = "paper";
+                    game();
+                    break;
+                case "scissors":
+                    playerSelection = "scissors";
+                    game();
+                    break;
+            }
+        })
+
         function getComputerChoice() {
             let numberChoice = Math.floor(Math.random() * 3) + 1
             // generate a number between 0 and 1, multiply by three, take the floor, and add 1. Range: (1:3)
@@ -58,23 +91,29 @@
         }
 
         function game() {
-            let roundResult;
-            let playerWinCount = 0;
-            let computerSelection;
-            let playerSelection;
-            for (let i = 0; i < 5; i++) {
-                playerSelection = prompt("Pick Rock, Paper, or Scissors: ");
-                computerSelection = getComputerChoice();
-                roundResult = playRound(playerSelection, computerSelection);
-                playerWinCount = didPlayerWin(roundResult) 
-                    ? playerWinCount + 1 
-                    : playerWinCount;
-                console.log(roundResult);
+            computerSelection = getComputerChoice();
+            roundResult = playRound(playerSelection, computerSelection);
+            playerWinCount = didPlayerWin(roundResult)
+                ? playerWinCount + 1
+                : playerWinCount;
+            roundNumber += 1;
+            roundResultView.textContent = roundResult;
+            matchResult.textContent = `User: ${playerWinCount} to Computer: ${roundNumber - playerWinCount}`;
+            if (playerWinCount == 5 || (roundNumber - playerWinCount) == 5) {
+                const finalResultScreen = document.createElement("div");
+                (playerWinCount == 5) ? finalResultScreen.textContent = "Congrats! You won!" : finalResultScreen.textContent = "Better Luck Next Time...";
+                resultView.appendChild(finalResultScreen);
+                setTimeout("", 3000)
+                location.reload();
             }
-            console.log(playerWinCount);
         }
 
-        game();
+        const roundResultView = document.createElement("div");
+        const matchResult = document.createElement("div");
+        resultView = document.querySelector(".result");
+        resultView.appendChild(roundResultView);
+        resultView.appendChild(matchResult);
+
     </script>
 </body>
 
